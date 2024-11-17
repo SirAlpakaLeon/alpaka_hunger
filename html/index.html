@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hunger Alert</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: rgba(0, 0, 0, 0.0);
+            position: absolute;
+            pointer-events: none;
+        }
+
+        #hunger-alert {
+            display: none;
+            width: 100px; 
+            height: 100px;
+            background-image: url('bild.png');
+            background-size: cover;
+            position: absolute;
+            bottom: 50px;
+            left: 350px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="hunger-alert"></div>
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data.action == 'show') {
+                document.getElementById('hunger-alert').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('hunger-alert').style.display = 'none';
+                }, event.data.duration);
+            }
+        });
+    </script>
+</body>
+</html>
